@@ -21,7 +21,7 @@
     <div id="label-container"></div>
 
     <script type="text/javascript">
-        const URL = "https://teachablemachine.withgoogle.com/models/LQs_CZCK3/";
+        const URL = "https://teachablemachine.withgoogle.com/models/LQsEMODELO/"; // 👈 Substitua pela URL correta do seu modelo
 
         let model, webcam, labelContainer, maxPredictions;
 
@@ -32,12 +32,13 @@
             model = await tmImage.load(modelURL, metadataURL);
             maxPredictions = model.getTotalClasses();
 
-            webcam = new tmImage.Webcam(200, 200, true);
+            webcam = new tmImage.Webcam(300, 300, true);
             await webcam.setup();
             await webcam.play();
             window.requestAnimationFrame(loop);
 
             document.getElementById("webcam-container").appendChild(webcam.canvas);
+
             labelContainer = document.getElementById("label-container");
             for (let i = 0; i < maxPredictions; i++) {
                 labelContainer.appendChild(document.createElement("div"));
@@ -57,15 +58,7 @@
                 labelContainer.childNodes[i].innerHTML = classPrediction;
             }
         }
-
-        const URL = "https://teachablemachine.withgoogle.com/models/LQsEMODELO/"; // 👈 coloque aqui sua URL correta!
-
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
-
-    <div id="webcam-container"></div>
-    <div id="label-container"></div>
 
 </body>
 
