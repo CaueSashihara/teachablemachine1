@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minha App Teachable Machine</title>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        button { padding: 10px 20px; font-size: 16px; }
+        #label-container { margin-top: 20px; font-size: 18px; }
+    </style>
 </head>
+
 <body>
-
-    <h2>Reconhecimento de Imagem com Teachable Machine</h2>
-
+    <h1>Reconhecimento com Teachable Machine</h1>
     <button onclick="init()">Iniciar Reconhecimento 🔥</button>
 
     <div id="webcam-container"></div>
     <div id="label-container"></div>
 
     <script type="text/javascript">
-        // Coloque a URL exata do seu modelo exportado do Teachable Machine aqui:
-        const URL = "COLE_AQUI_SUA_URL_COMPLETA_DO_TEACHABLE_MACHINE/";
+        // 👇 Insira aqui o link real do seu modelo Teachable Machine
+        const URL = "https://teachablemachine.withgoogle.com/models/SEU_MODELO_AQUI/";
 
         let model, webcam, labelContainer, maxPredictions;
 
@@ -35,7 +39,6 @@
             window.requestAnimationFrame(loop);
 
             document.getElementById("webcam-container").appendChild(webcam.canvas);
-
             labelContainer = document.getElementById("label-container");
             for (let i = 0; i < maxPredictions; i++) {
                 labelContainer.appendChild(document.createElement("div"));
@@ -51,40 +54,17 @@
         async function predict() {
             const prediction = await model.predict(webcam.canvas);
             for (let i = 0; i < maxPredictions; i++) {
-                const classPrediction = prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+                const classPrediction = prediction[i].className + ": " + (prediction[i].probability * 100).toFixed(2) + "%";
                 labelContainer.childNodes[i].innerHTML = classPrediction;
             }
         }
-
-        const URL = "https://teachablemachine.withgoogle.com/models/SEU_MODELO_AQUI/"; // 👈 Insira aqui seu link real!
-
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 
+    <div id="webcam-container"></div>
+    <div id="label-container"></div>
+
 </body>
+
 </html>
-```
-
----
-
-## 📌 **Como rodar esse projeto no GitHub rapidamente:**
-
-- Crie um repositório vazio no seu GitHub.
-- Suba esse arquivo (`index.html`) no repositório criado.
-- Ative o GitHub Pages no seu repositório:
-  - Vá em **Settings** → **Pages** → escolha `main` como branch.
-- Espere alguns segundos e abra o link que será disponibilizado pelo GitHub Pages.
-
-Agora, você terá sua aplicação rodando diretamente online!
-
----
-
-✨ **Resumo rápido do processo:**  
-
-**Treinar modelo (Teachable Machine)** → **Copiar Link** → **Substituir URL no HTML** → **Publicar no GitHub**
-
----
-
-**Agora não tem erro, Caue. É só partir pro abraço e ver a magia da IA rodando!**
